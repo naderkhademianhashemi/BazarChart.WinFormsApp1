@@ -1,0 +1,54 @@
+﻿<html>
+<head>
+    <script src="../js/jquery-3.6.3.js"></script>
+    <script src="../js/highcharts.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+    <script language="JavaScript">
+        $(document).ready(function () {
+            var title = {
+                text: 'a'
+            };
+            var xAxis = {
+                labels: {
+                    align: 'left',
+                    x: 3,
+                    y: -3
+                }
+            };
+            var yAxis = [
+                { // left y axis
+                    title: {
+                        text: 'y'
+                    },
+                    labels: {
+                        x: 3,
+                        y: 16,
+                    }
+                }
+            ];
+            var series = [
+                {
+                    name: 'All visits',
+                }
+            ]
+            var json = {};
+            json.title = title;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.series = series;
+
+            $.getJSON('../data csv/debt.csv', function (csv) {
+               var data = {
+                csv: csv
+            };
+            json.data = data;
+            $('#container').highcharts(json);
+        }); 
+            
+        });
+    </script>
+</body>
+
+</html>

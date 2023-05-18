@@ -1,0 +1,79 @@
+﻿<html>
+<head>
+    <script src="../js/jquery-3.6.3.js"></script>
+    <script src="../js/highcharts.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script language="JavaScript">
+        $(document).ready(function () {
+            var content_direction = 'rtl';
+            var is_reversed = (content_direction == 'rtl' ? true : false);
+            var title = {
+                text: 'ریسک بازار'
+            };
+            var xAxis = {
+                categories: ['21-05-22', '21-06-22', '22-07-22', '22-08-22',
+                    '22-09-22', '22-10-22',
+                    '21-11-22', '21-12-22', '20-01-23', '19-02-23']
+            };
+            var yAxis = {
+                title: {
+                    text: 'مبلغ'
+                }
+            };
+            var series = [
+                {
+                    name: 'دارایی - بدهی',
+                    data: [149147524, 160290999, 159753311, 158686861
+                        , 158418795, 158628054, 158676206, 158508333
+                        , 158093208, 165960489]
+                },
+                {
+                    name: 'بدهی',
+                    data: [330128047, 285675165, 288542654, 267180892
+                        , 314578878, 270717679, 531530684, 426927093
+                        , 347416855, 389766200]
+                }
+                ,
+                {
+                    name: 'دارایی',
+                    data: [479275571, 445966164, 425867753, 448295965, 472997673
+                        , 429345733, 690206890, 585435426, 505510063
+                        , 555726689]
+                }
+            
+            ];
+            var legend = {
+                rtl: is_reversed,
+            };
+            var tooltip = {
+                formatter: function () {
+                    return this.points.reduce(function (s, point) {
+                        let output = s + '<br/>' + point.series.name + ': ' +
+                            numberWithCommas(point.y)
+                        return output;
+                    }, '<b>' + this.x + '</b>');
+                },
+                shared: true
+            }
+            var credits={
+                enabled: false
+            };
+            var json = {};
+            json.title = title;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.series = series;
+            json.legend = legend;
+            json.tooltip = tooltip;
+            json.credits = credits;
+            $('#container').highcharts(json);
+        });
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    </script>
+</body>
+
+</html>
